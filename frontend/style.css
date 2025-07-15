@@ -1,0 +1,107 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background: linear-gradient(135deg, #f0f4ff, #fdfdff);
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+#taskName {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid #9b59b6;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+#addToList {
+    width: 100%;
+    padding: 12px;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#addToList:hover {
+    background-color: #8e44ad;
+}
+
+.tasksContainer {
+    padding: 0;
+    margin: 0;
+}
+
+.tasksContainer > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    border: 2px solid #9b59b6;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    list-style: none;
+    transition: background-color 0.3s ease;
+}
+
+.tasksContainer > li.green {
+    background-color: #d4fdd4;
+}
+
+.tasksContainer span {
+    flex: 1;
+    margin-left: 10px;
+    word-break: break-word;
+    transition: border-color 0.5s;
+    border: 2px solid transparent;
+    border-radius: 8px;
+}
+
+.tasksContainer span:hover {
+    border-color: #ffc107;
+}
+
+.tasksContainer input[type="checkbox"] {
+    transform: scale(1.4);
+    accent-color: #9b59b6;
+    cursor: pointer;
+}
+
+.deleteTask {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+.deleteTask:hover {
+    background-color: #c0392b;
+}
