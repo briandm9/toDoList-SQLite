@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { getTasks, postTask, putTask, delTask } = require('../controllers/taskController');
 
-router.get('/', async (req, res) =>{
+router.get('/', (req, res) =>{
     try{
-        const data = await getTasks();
+        const data = getTasks();
         res.status(200).json(data);
     }
     catch(error){
@@ -12,11 +12,11 @@ router.get('/', async (req, res) =>{
     }
 })
 
-router.post('/', async (req, res) =>{
+router.post('/', (req, res) =>{
     const {taskName} = req.body;
 
     try{
-        const { taskID } = await postTask(taskName);
+        const { taskID } = postTask(taskName);
         res.status(201).json({ message: "Task created successfully.", taskID});
     }
     catch(error){
@@ -24,12 +24,12 @@ router.post('/', async (req, res) =>{
     }
 })
 
-router.put('/:id', async (req, res) =>{
+router.put('/:id', (req, res) =>{
     const id = req.params.id;
     const { taskName, completed } = req.body;
 
     try{
-        await putTask(id, taskName, completed);
+        putTask(id, taskName, completed);
         res.status(200).json({ message: "Task modified successfully."});
     }
     catch(error){
@@ -37,10 +37,10 @@ router.put('/:id', async (req, res) =>{
     }
 })
 
-router.delete('/:id', async (req, res) =>{
+router.delete('/:id', (req, res) =>{
     const id = req.params.id;
     try{
-        await delTask(id);
+        delTask(id);
         res.status(200).json({ message: "Task deleted successfully."});
     }
     catch(error){

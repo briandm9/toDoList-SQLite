@@ -1,44 +1,43 @@
-const express = require('express');
-const sqlite = require('../sqlite/sqlite');
+const sqlite = require('../database/sqlite');
 
-const getTasks = () =>{
-    return new Promise((resolve, reject) =>{
-        const query = `SELECT * FROM tasks`;
-        sqlite.all(query, (err, row) =>{
-            if(err) return reject(err);
-            resolve(row);
-        })
-    })
-}
+const getTasks = () => {
+    const query = `SELECT * FROM tasks`;
+    try {
+        const rows = sqlite.prepare(query).all();
+        return rows;
+    } catch (err) {
+        throw err;
+    }
+};
 
-const postTask = (taskName) =>{
-    return new Promise((resolve, reject) =>{
-        const query = `INSERT INTO tasks (taskName) VALUES (?)`;
-        sqlite.run(query, [taskName], function(err){
-            if(err) return reject(err);
-            resolve({taskID: this.lastID});
-        })
-    })
-}
+const postTask = (taskName) => {
+    const query = `INSERT INTO tasks (taskname) VALUES (?)`;
+    try {
+        const stmt = sqlite.prepare(query);
+        const info = stmt.run(taskName);
+        return { taskID: info.lastInsertRowid };
+    } catch (err) {
+        throw err;
+    }
+};
 
-const putTask = async (taskID, taskName, completed) => {
-    return new Promise((resolve, reject) => {
-        const query = `UPDATE tasks SET taskname = ?, completed = ? WHERE taskid = ?`;
-        sqlite.run(query, [taskName, completed, taskID], (err) => {
-            if (err) return reject(err);
-            resolve();
-        });
-    });
-}
+const putTask = (taskID, taskName, completed) => {
+    const query = `UPDATE tasks SET taskname = ?, completed = ? WHERE taskid = ?`;
+    try {
+        const completedInt = completed ? 1 : 0;
+        sqlite.prepare(query).run(taskName, completedInt, Number(taskID));
+    } catch (err) {
+        throw err;
+    }
+};
 
-const delTask = (taskID) =>{
-    return new Promise((resolve, reject) =>{
-        const query = `DELETE FROM tasks WHERE taskid = ?`;
-        sqlite.run(query, [taskID], (err) =>{
-            if(err) reject(err);
-            resolve();
-        })
-    })
-}
+const delTask = (taskID) => {
+    const query = `DELETE FROM tasks WHERE taskid = ?`;
+    try {
+        sqlite.prepare(query).run(taskID);
+    } catch (err) {
+        throw err;
+    }
+};
 
 module.exports = { getTasks, postTask, putTask, delTask };

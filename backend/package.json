@@ -1,5 +1,5 @@
 {
-  "name": "toDoList-backend",
+  "name": "to-do-list-backend",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -9,8 +9,8 @@
   "author": "BrianDM",
   "license": "MIT",
   "dependencies": {
+    "better-sqlite3": "^12.2.0",
     "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "sqlite3": "^5.1.7"
+    "express": "^5.1.0"
   }
 }
